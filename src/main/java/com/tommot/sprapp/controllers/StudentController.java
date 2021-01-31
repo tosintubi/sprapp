@@ -3,15 +3,17 @@ package com.tommot.sprapp.controllers;
 import com.tommot.sprapp.models.Student;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 
 @Controller
+@RequestMapping("api/v1/student")
 public class StudentController {
 
-    @GetMapping("/student")
+    @GetMapping()
     public List<Student> greet(){
         LocalDate dob= LocalDate.of(1970, Month.JUNE,5);
         return List.of(new Student(
