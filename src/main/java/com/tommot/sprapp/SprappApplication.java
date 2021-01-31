@@ -10,6 +10,4 @@ public class SprappApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SprappApplication.class, args);
 	}
-
-
 }

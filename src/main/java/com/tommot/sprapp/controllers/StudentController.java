@@ -11,7 +11,7 @@ import java.util.List;
 @Controller
 public class StudentController {
 
-    @GetMapping("/greet")
+    @GetMapping("/student")
     public List<Student> greet(){
         LocalDate dob= LocalDate.of(1970, Month.JUNE,5);
         return List.of(new Student(
