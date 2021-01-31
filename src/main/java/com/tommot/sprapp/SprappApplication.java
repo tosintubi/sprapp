@@ -1,10 +1,13 @@
 package com.tommot.sprapp;
 
+import com.tommot.sprapp.student.Student;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 
 @SpringBootApplication
@@ -16,7 +19,15 @@ public class SprappApplication {
 	}
 
 	@GetMapping("/greet")
-	public List<String> greet(){
-		return List.of("hello","world");
+	public List<Student> greet(){
+		LocalDate dob= LocalDate.of(1970, Month.JUNE,5);
+		return List.of(new Student(
+				1L,
+				"John",
+				"Doe",
+				LocalDate.now().getYear()-dob.getYear(),
+				dob,
+				"john.doe@gmail.com"
+		));
 	}
 }
