@@ -1,6 +1,6 @@
 package com.tommot.sprapp;
 
-import com.tommot.sprapp.student.Student;
+import com.tommot.sprapp.models.Student;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package com.tommot.sprapp.student;
+package com.tommot.sprapp.models;
 
 import java.time.LocalDate;
 
