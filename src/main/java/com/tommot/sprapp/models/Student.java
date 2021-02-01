@@ -19,11 +19,29 @@ public class Student {
             generator = "student_sequence"
 
     )
+    @Column(
+            name = "id", updatable = false
+    )
     private Long id;
+
+    @Column(
+            name = "firstName",
+            updatable = false,
+            nullable = false
+    )
     private String firstName;
+
+    @Column(
+            name="lastName"
+    )
     private String lastName;
     private Integer age;
     private LocalDate dob;
+
+    @Column(
+            name = "email",
+            nullable = false
+    )
     private String email;
 
     public Student() {
