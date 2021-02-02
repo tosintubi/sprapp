@@ -5,9 +5,8 @@ import com.tommot.sprapp.models.Student;
 import com.tommot.sprapp.repositories.StudentRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -19,8 +18,17 @@ public class StudentService {
     }
 
     public List<Student> getStudents(){
-        LocalDate dob= LocalDate.of(1970, Month.JUNE,5);
         return studentRepository.findAll();
+    }
+
+    public void addNewStudent(Student student) {
+        Optional<Student> studentExists = studentRepository.findStudentByEmail(student.getEmail());
+        if (studentExists.isPresent()){
+            throw new IllegalStateException("Student email already exists");
+        }
+        else
+            studentRepository.save(student);
+        System.out.println(student);
     }
 }
 

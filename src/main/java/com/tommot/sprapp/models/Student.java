@@ -2,6 +2,7 @@ package com.tommot.sprapp.models;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
 
 
 @Entity
@@ -35,6 +36,7 @@ public class Student {
             name="lastName"
     )
     private String lastName;
+    @Transient
     private Integer age;
     private LocalDate dob;
 
@@ -47,19 +49,17 @@ public class Student {
     public Student() {
     }
 
-    public Student(Long id, String firstName, String lastName, Integer age, LocalDate dob, String email) {
+    public Student(Long id, String firstName, String lastName,  LocalDate dob, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = age;
         this.dob = dob;
         this.email = email;
     }
 
-    public Student(String firstName, String lastName, Integer age, LocalDate dob, String email) {
+    public Student(String firstName, String lastName, LocalDate dob, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = age;
         this.dob = dob;
         this.email = email;
     }
@@ -89,7 +89,7 @@ public class Student {
     }
 
     public Integer getAge() {
-        return age;
+        return Period.between(this.dob,LocalDate.now()).getYears();
     }
 
     public void setAge(Integer age) {
