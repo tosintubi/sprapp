@@ -31,4 +31,9 @@ public class StudentController {
         studentService.addNewStudent(student);
         return ResponseEntity.ok(HttpStatus.OK);
     }
+    @DeleteMapping(path = "{studentId}")
+    public ResponseEntity deleteStudent(@PathVariable("studentId") Long id){
+        studentService.deleteStudent(id);
+        return  ResponseEntity.ok(HttpStatus.OK);
+    }
 }
