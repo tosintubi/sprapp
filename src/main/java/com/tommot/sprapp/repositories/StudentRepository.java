@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 
-// Reposotory responsible for Dao
+// Repository responsible for Dao
 @Repository
 public interface  StudentRepository extends JpaRepository<Student, Long> {
 

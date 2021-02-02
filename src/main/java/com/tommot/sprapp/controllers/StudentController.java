@@ -21,19 +21,24 @@ public class StudentController {
         this.studentService = studentService;
     }
 
+    // Returns lists of registered students.
     @GetMapping
     public List<Student> getStudents(){
         return studentService.getStudents();
     }
 
+    // Register a new student.
     @PostMapping("/new")
     public ResponseEntity registerStudent(@RequestBody Student student){
         studentService.addNewStudent(student);
         return ResponseEntity.ok(HttpStatus.OK);
     }
+
+    //Delete student using studentId
     @DeleteMapping(path = "{studentId}")
     public ResponseEntity deleteStudent(@PathVariable("studentId") Long id){
         studentService.deleteStudent(id);
         return  ResponseEntity.ok(HttpStatus.OK);
     }
+
 }

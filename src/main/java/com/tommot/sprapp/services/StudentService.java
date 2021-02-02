@@ -3,6 +3,7 @@ package com.tommot.sprapp.services;
 
 import com.tommot.sprapp.models.Student;
 import com.tommot.sprapp.repositories.StudentRepository;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,6 +36,8 @@ public class StudentService {
     }
 
     public void deleteStudent(Long studentId) {
+        if (studentId==null)
+            throw new IllegalArgumentException("Invalid Student Id:"+studentId+"\nPlease enter a valid number");
         boolean studentExists = studentRepository.existsById(studentId);
         if (!studentExists)
             throw new IllegalArgumentException("Student with id :"+studentId+" does not exist");
