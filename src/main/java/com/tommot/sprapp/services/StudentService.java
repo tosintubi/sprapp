@@ -48,7 +48,6 @@ public class StudentService {
     @Transactional
     public void updateStudent(Long studentId, String lastName, String email) {
         //Validate Email, throws new IllegalArgumentException if email is invalid.
-
         /*if (!CustomUtils.isValidEmail(email))
             throw new IllegalArgumentException("Email address: "+email+" is invalid");*/
 
