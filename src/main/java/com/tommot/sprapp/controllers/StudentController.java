@@ -42,8 +42,8 @@ public class StudentController {
     }
 
     //Update Student information
-    @PutMapping
-    public ResponseEntity updateStudent(@PathVariable("studentID") Long studentId,
+    @PutMapping(path="{studentId}")
+    public ResponseEntity updateStudent(@PathVariable("studentId") Long studentId,
                                         @RequestParam(required = false) String lastName,
                                         @RequestParam(required = false) String email) {
         studentService.updateStudent(studentId, lastName, email);
