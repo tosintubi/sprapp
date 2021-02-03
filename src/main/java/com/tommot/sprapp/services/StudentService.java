@@ -3,10 +3,13 @@ package com.tommot.sprapp.services;
 
 import com.tommot.sprapp.models.Student;
 import com.tommot.sprapp.repositories.StudentRepository;
-import org.apache.commons.lang3.math.NumberUtils;
+import com.tommot.sprapp.utils.CustomUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -42,6 +45,30 @@ public class StudentService {
         if (!studentExists)
             throw new IllegalArgumentException("Student with id :"+studentId+" does not exist");
         studentRepository.deleteById(studentId );
+    }
+
+    public void updateStudent(Long studentId, String lastName, String email) {
+        //Validate Email, throws new IllegalArgumentException if email is invalid.
+        if (!CustomUtils.isValidEmail(email))
+            throw new IllegalArgumentException("Email address: "+email+" is invalid");
+
+        // Finds student using supplied Id
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new IllegalArgumentException("Student with Id: "+ studentId +" does not exist"));
+
+        //Updates lastName if different.
+        if(lastName != null && lastName.length()> 0 && !StringUtils.equals(student.getLastName(), lastName)){
+            student.setLastName(lastName);
+        }
+
+
+        // Checks if supplied email is taken
+        if (!StringUtils.equals(student.getEmail(),email)) {
+            Optional<Student> studentByEmailExists = studentRepository.findStudentByEmail(email);
+            if (studentByEmailExists.isPresent())
+                throw new IllegalStateException("Email address: "+email+" is already taken");
+            student.setEmail(email);
+        }
     }
 }
 

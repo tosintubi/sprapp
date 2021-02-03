@@ -41,4 +41,12 @@ public class StudentController {
         return  ResponseEntity.ok(HttpStatus.OK);
     }
 
+    //Update Student information
+    @PutMapping
+    public ResponseEntity updateStudent(@PathVariable("studentID") Long studentId,
+                                        @RequestParam(required = false) String lastName,
+                                        @RequestParam(required = false) String email) {
+        studentService.updateStudent(studentId, lastName, email);
+        return  ResponseEntity.ok(HttpStatus.OK);
+    }
 }
