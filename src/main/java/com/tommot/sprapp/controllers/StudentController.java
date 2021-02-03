@@ -5,13 +5,13 @@ import com.tommot.sprapp.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("api/v1/student")
+@RequestMapping("api/v1/students")
 public class StudentController {
 
     private final StudentService studentService;
@@ -27,6 +27,10 @@ public class StudentController {
         return studentService.getStudents();
     }
 
+    @GetMapping("{studentId}")
+    public Optional<Student> getStudent(@PathVariable Long studentId){
+        return studentService.getStudentById(studentId);
+    }
     // Register a new student.
     @PostMapping("/new")
     public ResponseEntity registerStudent(@RequestBody Student student){
@@ -49,4 +53,5 @@ public class StudentController {
         studentService.updateStudent(studentId, lastName, email);
         return  ResponseEntity.ok(HttpStatus.OK);
     }
+
 }

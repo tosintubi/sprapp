@@ -3,14 +3,11 @@ package com.tommot.sprapp.services;
 
 import com.tommot.sprapp.models.Student;
 import com.tommot.sprapp.repositories.StudentRepository;
-import com.tommot.sprapp.utils.CustomUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -75,6 +72,10 @@ public class StudentService {
             //Sets the email
             student.setEmail(email);
         }
+    }
+
+    public Optional<Student> getStudentById(Long studentId) {
+        return studentRepository.findById(studentId);
     }
 }
 
