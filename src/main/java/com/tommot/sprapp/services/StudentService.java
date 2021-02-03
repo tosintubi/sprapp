@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -47,6 +48,7 @@ public class StudentService {
         studentRepository.deleteById(studentId );
     }
 
+    @Transactional
     public void updateStudent(Long studentId, String lastName, String email) {
         //Validate Email, throws new IllegalArgumentException if email is invalid.
         if (!CustomUtils.isValidEmail(email))
@@ -67,6 +69,8 @@ public class StudentService {
             Optional<Student> studentByEmailExists = studentRepository.findStudentByEmail(email);
             if (studentByEmailExists.isPresent())
                 throw new IllegalStateException("Email address: "+email+" is already taken");
+
+            //Sets the email
             student.setEmail(email);
         }
     }
