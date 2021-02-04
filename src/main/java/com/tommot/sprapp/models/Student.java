@@ -1,6 +1,6 @@
 package com.tommot.sprapp.models;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -63,10 +63,6 @@ public class Student {
         this.lastName = lastName;
         this.dob = dob;
         this.email = email;
-    }
-
-    public Integer getAge() {
-        return Period.between(this.dob,LocalDate.now()).getYears();
     }
 
 }
