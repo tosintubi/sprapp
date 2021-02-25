@@ -49,8 +49,8 @@ public class StudentService {
     @Transactional
     public void updateStudent(Long studentId, String lastName, String email) {
         //Validate Email, throws new IllegalArgumentException if email is invalid.
-        if (!CustomUtils.isValidEmail(email))
-            throw new IllegalArgumentException("Email address: "+email+" is invalid");
+        /*if (!CustomUtils.isValidEmail(email))
+            throw new IllegalArgumentException("Email address: "+email+" is invalid");*/
 
         // Finds student using supplied Id
         Student student = studentRepository.findById(studentId)
@@ -62,7 +62,7 @@ public class StudentService {
         }
 
         // Checks if supplied email is taken
-        if (email!=null && email.length()> 0 && !StringUtils.equals(student.getEmail(),email)) {
+        if (CustomUtils.isValidEmail(email) && email.length()> 0 && !StringUtils.equals(student.getEmail(),email)) {
             Optional<Student> studentByEmailExists = studentRepository.findStudentByEmail(email);
             if (studentByEmailExists.isPresent()){
                 throw new IllegalStateException("Email address: "+email+" is already taken");
