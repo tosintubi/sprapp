@@ -3,6 +3,7 @@ package com.tommot.sprapp.services;
 
 import com.tommot.sprapp.models.Student;
 import com.tommot.sprapp.repositories.StudentRepository;
+import com.tommot.sprapp.utils.CustomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -48,8 +49,8 @@ public class StudentService {
     @Transactional
     public void updateStudent(Long studentId, String lastName, String email) {
         //Validate Email, throws new IllegalArgumentException if email is invalid.
-        /*if (!CustomUtils.isValidEmail(email))
-            throw new IllegalArgumentException("Email address: "+email+" is invalid");*/
+        if (!CustomUtils.isValidEmail(email))
+            throw new IllegalArgumentException("Email address: "+email+" is invalid");
 
         // Finds student using supplied Id
         Student student = studentRepository.findById(studentId)
@@ -59,8 +60,6 @@ public class StudentService {
         if(lastName != null && lastName.length()> 0 && !StringUtils.equals(student.getLastName(), lastName)){
             student.setLastName(lastName);
         }
-
-
 
         // Checks if supplied email is taken
         if (email!=null && email.length()> 0 && !StringUtils.equals(student.getEmail(),email)) {

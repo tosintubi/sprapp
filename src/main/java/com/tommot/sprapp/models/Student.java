@@ -64,6 +64,5 @@ public class Student {
         this.dob = dob;
         this.email = email;
     }
-
 }
 
