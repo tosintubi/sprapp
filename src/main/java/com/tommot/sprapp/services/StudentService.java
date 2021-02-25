@@ -3,6 +3,7 @@ package com.tommot.sprapp.services;
 
 import com.tommot.sprapp.models.Student;
 import com.tommot.sprapp.repositories.StudentRepository;
+import com.tommot.sprapp.utils.CustomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -63,7 +64,7 @@ public class StudentService {
 
 
         // Checks if supplied email is taken
-        if (email!=null && email.length()> 0 && !StringUtils.equals(student.getEmail(),email)) {
+        if (CustomUtils.isValidEmail(email) && email.length()> 0 && !StringUtils.equals(student.getEmail(),email)) {
             Optional<Student> studentByEmailExists = studentRepository.findStudentByEmail(email);
             if (studentByEmailExists.isPresent()){
                 throw new IllegalStateException("Email address: "+email+" is already taken");
